@@ -12,9 +12,9 @@ cdk.out/*
 .venv
 
 # PEP 582; used by e.g. github.com/David-OConnor/pyflow
-__pycache__/
+stacks/__pycache__/
 __init__
-app.egg-info/
+stacks/app.egg-info/
 .egg/
 stacks/__pycache__/*
 stacks/__pycache__/vpc_stack.cpython-39.pyc
