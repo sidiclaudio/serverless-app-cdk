@@ -1,1 +1,25 @@
+
+# Local state files & OS specifics
 .DS_Store
+
+# CDK Context & Staging files
+cdk.context.json
+.cdk.staging/
+cdk.out/
+cdk.out/*
+
+# Environments
+.venv
+
+# PEP 582; used by e.g. github.com/David-OConnor/pyflow
+__pycache__/
+__init__
+app.egg-info/
+.egg/
+stacks/__pycache__/*
+stacks/__pycache__/vpc_stack.cpython-39.pyc
+
+#Python
+__init__.py
+
+
