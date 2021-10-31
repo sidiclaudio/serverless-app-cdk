@@ -14,7 +14,7 @@ from stacks.security_stack import SecurityStack
 app = core.App()
 
 vpc_stack = VpcStack(app, 'vpc-stack')
-security_stack = SecurityStack(app, 'security-stack')
+security_stack = SecurityStack(app, 'security-stack', vpc=vpc_stack.vpc)
 
 # If you don't specify 'env', this stack will be environment-agnostic.
 # Account/Region-dependent features and context lookups will not work,

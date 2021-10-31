@@ -14,7 +14,7 @@ from aws_cdk import (
 
 class SecurityStack(cdk.Stack):
 
-    def __init__(self, scope: cdk.Construct, vpc: ec2.Vpc, construct_id: str, **kwargs) -> None:
+    def __init__(self, scope: cdk.Construct, construct_id: str, vpc: ec2.Vpc, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
         self.lambda_sg = ec2.SecurityGroup(self, 'lambdasg',
@@ -24,12 +24,21 @@ class SecurityStack(cdk.Stack):
                                            description='lambda security group'
                                            )
 
-        self.bastion_sg = ec2.SecurityGroup(self, 'bastionsg',
-                                            allow_all_outbound=True,
-                                            description='bastion host sg',
-                                            security_group_name='bastion-sg',
-                                            vpc=vpc
-                                            )
+        # self.bastion_sg = ec2.SecurityGroup(self, 'bastionsg',
+        #                                     allow_all_outbound=True,
+        #                                     description='bastion host sg',
+        #                                     security_group_name='bastion-sg',
+        #                                     vpc=vpc
+        #                                     )
 
-        self.bastion_sg.add_ingress_rule(
-            ec2.Peer.ipv4(), ec2.Port.tcp(22), 'SSH from anywhere')
+        # self.bastion_sg.add_ingress_rule(
+        #     ec2.Peer.ipv4(), ec2.Port.tcp(22), 'SSH from anywhere')
+
+        # self.lambda_role = iam.Role(self, 'lambdarole',
+        #                             assumed_by=iam.ServicePrincipal(
+        #                                 service='lambda.amazonaws.com'),
+        #                             description='bastion IAM role',
+        #                             managed_policies=[iam.ManagedPolicy.from_managed_policy_name(
+        #                                 managed_policy_name='service-role/AWSLambdaVPCAccessExecutionRole'
+        #                             )]
+        #                             )

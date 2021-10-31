@@ -11,7 +11,13 @@ cdk.out/*
 # Environments
 .venv
 
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.pyc
+*.pyo
+
 # PEP 582; used by e.g. github.com/David-OConnor/pyflow
+**/__pycache__/
 stacks/__pycache__/
 __init__
 stacks/app.egg-info/
@@ -19,7 +25,16 @@ stacks/app.egg-info/
 stacks/__pycache__/*
 stacks/__pycache__/vpc_stack.cpython-39.pyc
 
-#Python
-__init__.py
+# PEP 582; used by e.g. github.com/David-OConnor/pyflow
+__pypackages__/
+
+# Distribution / packaging
+eggs/
+.eggs/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
 
 
