@@ -44,8 +44,24 @@ class SecurityStack(cdk.Stack):
                                         managed_policy_name='service-role/AWSLambdaVPCAccessExecutionRole'
                                     )]
                                     )
-
+        # Attach inline policy
         self.lambda_role.add_to_policy(iam.PolicyStatement(
             resources=['*'],
             actions=['rds:*', 's3:*']
         ))
+
+        # SSM Parameters definition
+        ssm.StringParameter(self, 'lambdasg-param',
+                            parameter_name='/root' + '/lambdasg-param',
+                            string_value=self.lambda_sg.security_group_id
+                            )
+
+        ssm.StringParameter(self, 'lambdarole-param-name',
+                            parameter_name='/root' + '/lambdarole-param-name',
+                            string_value=self.lambda_role.role_name
+                            )
+
+        ssm.StringParameter(self, 'lambdarole-param-arn',
+                            parameter_name='/root' + '/lambdarole-param-arn',
+                            string_value=self.lambda_role.role_arn
+                            )
