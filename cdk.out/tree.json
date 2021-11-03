@@ -954,6 +954,50 @@
               "version": "1.130.0"
             }
           },
+          "bastionsg": {
+            "id": "bastionsg",
+            "path": "security-stack/bastionsg",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "security-stack/bastionsg/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroup",
+                  "aws:cdk:cloudformation:props": {
+                    "groupDescription": "bastion host sg",
+                    "groupName": "bastion-sg",
+                    "securityGroupEgress": [
+                      {
+                        "cidrIp": "0.0.0.0/0",
+                        "description": "Allow all outbound traffic by default",
+                        "ipProtocol": "-1"
+                      }
+                    ],
+                    "securityGroupIngress": [
+                      {
+                        "cidrIp": "0.0.0.0/0",
+                        "ipProtocol": "tcp",
+                        "fromPort": 22,
+                        "toPort": 22,
+                        "description": "SSH from anywhere"
+                      }
+                    ],
+                    "vpcId": {
+                      "Fn::ImportValue": "vpc-stack:ExportsOutputRefdevVPC524BF54C27F5E3C9"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-ec2.CfnSecurityGroup",
+                  "version": "1.130.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/aws-ec2.SecurityGroup",
+              "version": "1.130.0"
+            }
+          },
           "CDKMetadata": {
             "id": "CDKMetadata",
             "path": "security-stack/CDKMetadata",
