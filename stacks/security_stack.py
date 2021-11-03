@@ -35,16 +35,17 @@ class SecurityStack(cdk.Stack):
             ec2.Peer.any_ipv4(), ec2.Port.tcp(22), 'SSH from anywhere')
 
         # Create a Lambda Role and attach a Managed policy
-        # self.lambda_role = iam.Role(self, 'lambdarole',
-        #                             assumed_by=iam.ServicePrincipal(
-        #                                 service='lambda.amazonaws.com'),
-        #                             description='bastion IAM role',
-        #                             managed_policies=[iam.ManagedPolicy.from_managed_policy_name(self,
-        #                                 managed_policy_name='service-role/AWSLambdaVPCAccessExecutionRole'
-        #                             )]
-        #                             )
+        self.lambda_role = iam.Role(self, 'lambdarole',
+                                    assumed_by=iam.ServicePrincipal(
+                                        service='lambda.amazonaws.com'),
+                                    description='bastion IAM role',
+                                    role_name='cdk-lambda-role',
+                                    managed_policies=[iam.ManagedPolicy.from_aws_managed_policy_name(
+                                        managed_policy_name='service-role/AWSLambdaVPCAccessExecutionRole'
+                                    )]
+                                    )
 
-        # self.lambda_role.add_to_policy(iam.PolicyStatement(
-        #     resources=['*'],
-        #     actions=['rds:*', 's3:*']
-        # ))
+        self.lambda_role.add_to_policy(iam.PolicyStatement(
+            resources=['*'],
+            actions=['rds:*', 's3:*']
+        ))
