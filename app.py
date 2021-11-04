@@ -10,11 +10,18 @@ from aws_cdk import core
 
 from stacks.vpc_stack import VpcStack
 from stacks.security_stack import SecurityStack
+from stacks.bastion_stack import BastionStack
 
 app = core.App()
 
+# Object - An instance of vpc stack class
 vpc_stack = VpcStack(app, 'vpc-stack')
+# Object - An instance of security group stack class
 security_stack = SecurityStack(app, 'security-stack', vpc=vpc_stack.vpc)
+# Object - An instance of bastion stack class
+# Referencing vpc and sg stacks
+bastion_stack = BastionStack(
+    app, 'bastion-stack', vpc=vpc_stack.vpc, sg=security_stack.bastion_sg)
 
 # If you don't specify 'env', this stack will be environment-agnostic.
 # Account/Region-dependent features and context lookups will not work,
